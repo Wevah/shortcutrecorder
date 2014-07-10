@@ -15,7 +15,9 @@
 #import "SRValidator.h"
 #import "SRCommon.h"
 
-@implementation SRValidator
+@implementation SRValidator {
+    id              delegate;
+}
 
 //---------------------------------------------------------- 
 // iinitWithDelegate:

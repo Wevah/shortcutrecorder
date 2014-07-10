@@ -20,7 +20,9 @@
 - (void)resetTrackingRects;
 @end
 
-@implementation SRRecorderControl
+@implementation SRRecorderControl {
+	IBOutlet id delegate;
+}
 
 + (void)initialize
 {
