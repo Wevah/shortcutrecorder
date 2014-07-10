@@ -155,30 +155,30 @@
 	
 	if ([aCoder allowsKeyedCoding]) {
 		[aCoder encodeObject:[self autosaveName] forKey:@"autosaveName"];
-		[aCoder encodeObject:[NSNumber numberWithShort: keyCombo.code] forKey:@"keyComboCode"];
-		[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:keyCombo.flags] forKey:@"keyComboFlags"];
+		[aCoder encodeObject:@((short)keyCombo.code) forKey:@"keyComboCode"];
+		[aCoder encodeObject:@(keyCombo.flags) forKey:@"keyComboFlags"];
 	
-		[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:allowedFlags] forKey:@"allowedFlags"];
-		[aCoder encodeObject:[NSNumber numberWithUnsignedInteger:requiredFlags] forKey:@"requiredFlags"];
+		[aCoder encodeObject:@(allowedFlags) forKey:@"allowedFlags"];
+		[aCoder encodeObject:@(requiredFlags) forKey:@"requiredFlags"];
 		
 		if (hasKeyChars) {
 			[aCoder encodeObject:keyChars forKey:@"keyChars"];
 			[aCoder encodeObject:keyCharsIgnoringModifiers forKey:@"keyCharsIgnoringModifiers"];
 		}
 		
-		[aCoder encodeObject:[NSNumber numberWithBool: allowsKeyOnly] forKey:@"allowsKeyOnly"];
-		[aCoder encodeObject:[NSNumber numberWithBool: escapeKeysRecord] forKey:@"escapeKeysRecord"];
+		[aCoder encodeObject:@(allowsKeyOnly) forKey:@"allowsKeyOnly"];
+		[aCoder encodeObject:@(escapeKeysRecord) forKey:@"escapeKeysRecord"];
 		
-		[aCoder encodeObject:[NSNumber numberWithBool: isAnimating] forKey:@"isAnimating"];
-		[aCoder encodeObject:[NSNumber numberWithShort:style] forKey:@"style"];
+		[aCoder encodeObject:@(isAnimating) forKey:@"isAnimating"];
+		[aCoder encodeObject:@((short)style) forKey:@"style"];
 	} else {
 		// Unkeyed archiving and encoding is deprecated and unsupported. Use keyed archiving and encoding.
 		[aCoder encodeObject: [self autosaveName]];
-		[aCoder encodeObject: [NSNumber numberWithShort: keyCombo.code]];
-		[aCoder encodeObject: [NSNumber numberWithUnsignedInteger: keyCombo.flags]];
+		[aCoder encodeObject: @((short)keyCombo.code)];
+		[aCoder encodeObject: @(keyCombo.flags)];
 		
-		[aCoder encodeObject: [NSNumber numberWithUnsignedInteger:allowedFlags]];
-		[aCoder encodeObject: [NSNumber numberWithUnsignedInteger:requiredFlags]];
+		[aCoder encodeObject: @(allowedFlags)];
+		[aCoder encodeObject: @(requiredFlags)];
 	}
 }
 
@@ -316,10 +316,9 @@
 		
 	// Only the KeyCombo should be black and in a bigger font size
 		BOOL recordingOrEmpty = (isRecording || [self _isEmpty]);
-		NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: mpstyle, NSParagraphStyleAttributeName,
-			[NSFont systemFontOfSize: (recordingOrEmpty ? [NSFont labelFontSize] : [NSFont smallSystemFontSize])], NSFontAttributeName,
-			(recordingOrEmpty ? [NSColor disabledControlTextColor] : [NSColor blackColor]), NSForegroundColorAttributeName, 
-			nil];
+		NSDictionary *attributes = @{NSParagraphStyleAttributeName: mpstyle,
+			NSFontAttributeName: [NSFont systemFontOfSize: (recordingOrEmpty ? [NSFont labelFontSize] : [NSFont smallSystemFontSize])],
+			NSForegroundColorAttributeName: (recordingOrEmpty ? [NSColor disabledControlTextColor] : [NSColor blackColor])};
 		
 		NSString *displayString;
 		
@@ -528,10 +527,9 @@
 		{
 	// Only the KeyCombo should be black and in a bigger font size
 			BOOL recordingOrEmpty = (isVaguelyRecording || [self _isEmpty]);
-			NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: mpstyle, NSParagraphStyleAttributeName,
-				[NSFont systemFontOfSize: (recordingOrEmpty ? [NSFont labelFontSize] : [NSFont smallSystemFontSize])], NSFontAttributeName,
-				[(recordingOrEmpty ? [NSColor disabledControlTextColor] : [NSColor blackColor]) colorWithAlphaComponent:alphaRecordingText], NSForegroundColorAttributeName, 
-				nil];
+			NSDictionary *attributes = @{NSParagraphStyleAttributeName: mpstyle,
+				NSFontAttributeName: [NSFont systemFontOfSize: (recordingOrEmpty ? [NSFont labelFontSize] : [NSFont smallSystemFontSize])],
+				NSForegroundColorAttributeName: [(recordingOrEmpty ? [NSColor disabledControlTextColor] : [NSColor blackColor]) colorWithAlphaComponent:alphaRecordingText]};
 		// Recording, but no modifier keys down
 			if (![self _validModifierFlags: recordingFlags])
 			{
@@ -573,10 +571,9 @@
 		
 		{
 	// Only the KeyCombo should be black and in a bigger font size
-			NSDictionary *attributes = [NSDictionary dictionaryWithObjectsAndKeys: mpstyle, NSParagraphStyleAttributeName,
-				[NSFont systemFontOfSize: ([self _isEmpty] ? [NSFont labelFontSize] : [NSFont smallSystemFontSize])], NSFontAttributeName,
-				[([self _isEmpty] ? [NSColor disabledControlTextColor] : [NSColor blackColor]) colorWithAlphaComponent:alphaCombo], NSForegroundColorAttributeName, 
-				nil];
+			NSDictionary *attributes = @{NSParagraphStyleAttributeName: mpstyle,
+				NSFontAttributeName: [NSFont systemFontOfSize: ([self _isEmpty] ? [NSFont labelFontSize] : [NSFont smallSystemFontSize])],
+				NSForegroundColorAttributeName: [([self _isEmpty] ? [NSColor disabledControlTextColor] : [NSColor blackColor]) colorWithAlphaComponent:alphaCombo]};
 		// Not recording...
 			if ([self _isEmpty])
 			{
@@ -809,7 +806,7 @@
 - (BOOL) performKeyEquivalent:(NSEvent *)theEvent
 {	
 	NSUInteger flags = [self _filteredCocoaFlags: [theEvent modifierFlags]];
-	NSNumber *keyCodeNumber = [NSNumber numberWithUnsignedShort: [theEvent keyCode]];
+	NSNumber *keyCodeNumber = @([theEvent keyCode]);
 	BOOL snapback = [cancelCharacterSet containsObject: keyCodeNumber];
 	BOOL validModifiers = [self _validModifierFlags: (snapback) ? [theEvent modifierFlags] : flags]; // Snapback key shouldn't interfer with required flags!
     
@@ -1100,8 +1097,8 @@
 	hasKeyChars = NO;
 	
 	// These keys will cancel the recoding mode if not pressed with any modifier
-	cancelCharacterSet = [[NSSet alloc] initWithObjects: [NSNumber numberWithInteger:ShortcutRecorderEscapeKey], 
-		[NSNumber numberWithInteger:ShortcutRecorderBackspaceKey], [NSNumber numberWithInteger:ShortcutRecorderDeleteKey], nil];
+	cancelCharacterSet = [[NSSet alloc] initWithObjects: @ShortcutRecorderEscapeKey, 
+		@ShortcutRecorderBackspaceKey, @ShortcutRecorderDeleteKey, nil];
 		
 	NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
 	[notificationCenter addObserver:self selector:@selector(_createGradient) name:NSSystemColorsDidChangeNotification object:nil]; // recreate gradient if needed
@@ -1226,17 +1223,15 @@
 	{
 		id values = [[NSUserDefaultsController sharedUserDefaultsController] values];
 		
-		NSDictionary *defaultsValue = [NSDictionary dictionaryWithObjectsAndKeys:
-			[NSNumber numberWithShort: keyCombo.code], @"keyCode",
-			[NSNumber numberWithUnsignedInteger: keyCombo.flags], @"modifierFlags", // cocoa
-			[NSNumber numberWithUnsignedInteger:SRCocoaToCarbonFlags(keyCombo.flags)], @"modifiers", // carbon, for compatibility with PTKeyCombo
-			nil];
+		NSDictionary *defaultsValue = @{@"keyCode": @((short)keyCombo.code),
+			@"modifierFlags": @(keyCombo.flags), // cocoa
+			@"modifiers": @(SRCocoaToCarbonFlags(keyCombo.flags))};
 		
 		if (hasKeyChars) {
 			
 			NSMutableDictionary *mutableDefaultsValue = [defaultsValue mutableCopy];
-			[mutableDefaultsValue setObject:keyChars forKey:@"keyChars"];
-			[mutableDefaultsValue setObject:keyCharsIgnoringModifiers forKey:@"keyCharsIgnoringModifiers"];
+			mutableDefaultsValue[@"keyChars"] = keyChars;
+			mutableDefaultsValue[@"keyCharsIgnoringModifiers"] = keyCharsIgnoringModifiers;
 			
 			defaultsValue = mutableDefaultsValue;
 		}
