@@ -17,45 +17,34 @@
 @interface SRRecorderControl : NSControl
 
 #pragma mark *** Aesthetics ***
-- (BOOL)animates;
-- (void)setAnimates:(BOOL)an;
-- (SRRecorderStyle)style;
-- (void)setStyle:(SRRecorderStyle)nStyle;
+@property (assign)	BOOL			animates;
+@property (assign)	SRRecorderStyle	style;
 
 #pragma mark *** Delegate ***
-- (id)delegate;
-- (void)setDelegate:(id)aDelegate;
+@property	(assign)	id	delegate;
 
 #pragma mark *** Key Combination Control ***
 
-- (NSUInteger)allowedFlags;
-- (void)setAllowedFlags:(NSUInteger)flags;
+@property (assign)	NSUInteger	allowedFlags;
 
 - (BOOL)allowsKeyOnly;
 - (void)setAllowsKeyOnly:(BOOL)nAllowsKeyOnly escapeKeysRecord:(BOOL)nEscapeKeysRecord;
 - (BOOL)escapeKeysRecord;
 
-- (BOOL)canCaptureGlobalHotKeys;
-- (void)setCanCaptureGlobalHotKeys:(BOOL)inState;
-
-- (NSUInteger)requiredFlags;
-- (void)setRequiredFlags:(NSUInteger)flags;
-
-- (KeyCombo)keyCombo;
-- (void)setKeyCombo:(KeyCombo)aKeyCombo;
-
-- (NSString *)keyChars;
-- (NSString *)keyCharsIgnoringModifiers;
+@property (assign)		BOOL	canCaptureGlobalHotKeys;
+@property (assign)		NSUInteger	requiredFlags;
+@property (assign)		KeyCombo	keyCombo;
+@property (readonly)	NSString	*keyChars;
+@property (readonly)	NSString	*keyCharsIgnoringModifiers;
 
 #pragma mark *** Autosave Control ***
 
-- (NSString *)autosaveName;
-- (void)setAutosaveName:(NSString *)aName;
+@property (copy)	NSString	*autosaveName;
 
 #pragma mark -
 
 // Returns the displayed key combination if set
-- (NSString *)keyComboString;
+@property (readonly)	NSString	*keyComboString;
 
 #pragma mark *** Conversion Methods ***
 
@@ -64,8 +53,7 @@
 
 #pragma mark *** Binding Methods ***
 
-- (NSDictionary *)objectValue;
-- (void)setObjectValue:(NSDictionary *)shortcut;
+@property	(copy)	NSDictionary	*objectValue;
 
 @end
 

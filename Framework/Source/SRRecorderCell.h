@@ -42,15 +42,12 @@ typedef enum SRRecorderStyle SRRecorderStyle;
 
 + (BOOL)styleSupportsAnimation:(SRRecorderStyle)style;
 
-- (BOOL)animates;
-- (void)setAnimates:(BOOL)an;
-- (SRRecorderStyle)style;
-- (void)setStyle:(SRRecorderStyle)nStyle;
+@property (assign)		BOOL			animates;
+@property (assign)		SRRecorderStyle	style;
 
 #pragma mark *** Delegate ***
 
-- (id)delegate;
-- (void)setDelegate:(id)aDelegate;
+@property	(assign)	id				delegate;
 
 #pragma mark *** Responder Control ***
 
@@ -62,34 +59,24 @@ typedef enum SRRecorderStyle SRRecorderStyle;
 - (BOOL)performKeyEquivalent:(NSEvent *)theEvent;
 - (void)flagsChanged:(NSEvent *)theEvent;
 
-- (NSUInteger)allowedFlags;
-- (void)setAllowedFlags:(NSUInteger)flags;
+@property (assign)	NSUInteger	allowedFlags;
+@property (assign)	NSUInteger	requiredFlags;
 
-- (NSUInteger)requiredFlags;
-- (void)setRequiredFlags:(NSUInteger)flags;
-
-- (BOOL)allowsKeyOnly;
-- (void)setAllowsKeyOnly:(BOOL)nAllowsKeyOnly;
+@property (assign)	BOOL		allowsKeyOnly;
+@property (assign)	BOOL		escapeKeysRecord;
 - (void)setAllowsKeyOnly:(BOOL)nAllowsKeyOnly escapeKeysRecord:(BOOL)nEscapeKeysRecord;
-- (BOOL)escapeKeysRecord;
-- (void)setEscapeKeysRecord:(BOOL)nEscapeKeysRecord;
 
-- (BOOL)canCaptureGlobalHotKeys;
-- (void)setCanCaptureGlobalHotKeys:(BOOL)inState;
-
-- (KeyCombo)keyCombo;
-- (void)setKeyCombo:(KeyCombo)aKeyCombo;
+@property (assign)	BOOL		canCaptureGlobalHotKeys;
+@property (assign)	KeyCombo	keyCombo;
 
 #pragma mark *** Autosave Control ***
 
-- (NSString *)autosaveName;
-- (void)setAutosaveName:(NSString *)aName;
+@property (copy)	NSString	*autosaveName;
 
 // Returns the displayed key combination if set
-- (NSString *)keyComboString;
-
-- (NSString *)keyChars;
-- (NSString *)keyCharsIgnoringModifiers;
+@property (readonly)	NSString	*keyComboString;
+@property (readonly)	NSString	*keyChars;
+@property (readonly)	NSString	*keyCharsIgnoringModifiers;
 
 @end
 
