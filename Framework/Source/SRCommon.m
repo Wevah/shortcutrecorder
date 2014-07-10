@@ -281,7 +281,12 @@ static NSMutableDictionary *SRSharedImageCache = nil;
 	
 //	NSLog(@"constructing image");
 	NSSize size;
-	NSValue *sizeValue = [self performSelector:NSSelectorFromString([NSString stringWithFormat:@"_size%@", name])];
+
+	SEL selector = NSSelectorFromString([NSString stringWithFormat:@"_size%@", name]);
+	IMP imp = [self methodForSelector:selector];
+	NSValue *(*func)(id, SEL) = (void *)imp;
+	NSValue *sizeValue = func(self, selector);
+
 	size = [sizeValue sizeValue];
 //	NSLog(@"size: %@", NSStringFromSize(size));
 	
