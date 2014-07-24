@@ -1043,11 +1043,7 @@
 	return keyCharsIgnoringModifiers;
 }
 
-@end
-
-#pragma mark -
-
-@implementation SRRecorderCell (Private)
+#pragma mark - Private
 
 - (void)_privateInit
 {

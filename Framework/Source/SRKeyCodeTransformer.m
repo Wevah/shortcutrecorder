@@ -197,11 +197,7 @@ static NSArray              *padKeysArray        = nil;
     return stringToKeyCodeDict[value];
 }
 
-@end
-
-#pragma mark -
-
-@implementation SRKeyCodeTransformer( Private )
+#pragma mark - Private
 
 //---------------------------------------------------------- 
 //  regenerateStringToKeyCodeMapping: 
