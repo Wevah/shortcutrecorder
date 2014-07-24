@@ -237,18 +237,3 @@
 }
 
 @end
-
-#pragma mark -
-#pragma mark default delegate implementation
-
-@implementation NSObject( SRValidation )
-
-//---------------------------------------------------------- 
-// shortcutValidator:isKeyCode:andFlagsTaken:reason:
-//---------------------------------------------------------- 
-- (BOOL) shortcutValidator:(SRValidator *)validator isKeyCode:(NSInteger)keyCode andFlagsTaken:(NSUInteger)flags reason:(NSString **)aReason;
-{
-    return NO;
-}
-
-@end

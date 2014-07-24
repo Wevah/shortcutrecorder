@@ -13,6 +13,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "SRCommon.h"
+#import "SRValidator.h"
 
 #define SRMinWidth 50
 #define SRMaxHeight 22
@@ -34,7 +35,7 @@ enum SRRecorderStyle {
 };
 typedef enum SRRecorderStyle SRRecorderStyle;
 
-@interface SRRecorderCell : NSActionCell <NSCoding>
+@interface SRRecorderCell : NSActionCell <NSCoding, SRValidatorDelegate>
 
 - (void)resetTrackingRects;
 
