@@ -253,19 +253,6 @@ CGFloat SRAnimationEaseInOut(CGFloat t) {
 
 static NSMutableDictionary *SRSharedImageCache = nil;
 
-@interface SRSharedImageProvider (Private)
-+ (void)_drawSRSnapback:(id)anNSCustomImageRep;
-+ (NSValue *)_sizeSRSnapback;
-+ (void)_drawSRRemoveShortcut:(id)anNSCustomImageRep;
-+ (NSValue *)_sizeSRRemoveShortcut;
-+ (void)_drawSRRemoveShortcutRollover:(id)anNSCustomImageRep;
-+ (NSValue *)_sizeSRRemoveShortcutRollover;
-+ (void)_drawSRRemoveShortcutPressed:(id)anNSCustomImageRep;
-+ (NSValue *)_sizeSRRemoveShortcutPressed;
-
-+ (void)_drawARemoveShortcutBoxUsingRep:(id)anNSCustomImageRep opacity:(CGFloat)opacity;
-@end
-
 @implementation SRSharedImageProvider
 + (NSImage *)supportingImageWithName:(NSString *)name {
 //	NSLog(@"supportingImageWithName: %@", name);
