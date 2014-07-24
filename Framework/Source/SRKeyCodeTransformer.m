@@ -20,12 +20,6 @@ static NSMutableDictionary  *stringToKeyCodeDict = nil;
 static NSDictionary         *keyCodeToStringDict = nil;
 static NSArray              *padKeysArray        = nil;
 
-@interface SRKeyCodeTransformer( Private )
-+ (void) regenerateStringToKeyCodeMapping;
-@end
-
-#pragma mark -
-
 @implementation SRKeyCodeTransformer
 
 //---------------------------------------------------------- 

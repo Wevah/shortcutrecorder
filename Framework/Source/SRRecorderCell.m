@@ -16,35 +16,6 @@
 #import "SRKeyCodeTransformer.h"
 #import "SRValidator.h"
 
-@interface SRRecorderCell (Private)
-- (void)_privateInit;
-- (void)_createGradient;
-- (void)_setJustChanged;
-- (void)_startRecordingTransition;
-- (void)_endRecordingTransition;
-- (void)_transitionTick;
-- (void)_startRecording;
-- (void)_endRecording;
-
-- (BOOL)_effectiveIsAnimating;
-- (BOOL)_supportsAnimation;
-
-- (NSString *)_defaultsKeyForAutosaveName:(NSString *)name;
-- (void)_saveKeyCombo;
-- (void)_loadKeyCombo;
-
-- (NSRect)_removeButtonRectForFrame:(NSRect)cellFrame;
-- (NSRect)_snapbackRectForFrame:(NSRect)cellFrame;
-
-- (NSUInteger)_filteredCocoaFlags:(NSUInteger)flags;
-- (NSUInteger)_filteredCocoaToCarbonFlags:(NSUInteger)cocoaFlags;
-- (BOOL)_validModifierFlags:(NSUInteger)flags;
-
-- (BOOL)_isEmpty;
-@end
-
-#pragma mark -
-
 @implementation SRRecorderCell {
 	NSGradient          *recordingGradient;
 	NSString            *autosaveName;

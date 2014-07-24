@@ -16,10 +16,6 @@
 
 #define SRCell (SRRecorderCell *)[self cell]
 
-@interface SRRecorderControl (Private)
-- (void)resetTrackingRects;
-@end
-
 @implementation SRRecorderControl {
 	IBOutlet id delegate;
 }
