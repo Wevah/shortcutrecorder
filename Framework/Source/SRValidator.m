@@ -15,9 +15,7 @@
 #import "SRValidator.h"
 #import "SRCommon.h"
 
-@implementation SRValidator {
-    id <SRValidatorDelegate>	delegate;
-}
+@implementation SRValidator
 
 //---------------------------------------------------------- 
 // iinitWithDelegate:
@@ -39,6 +37,8 @@
 - (BOOL) isKeyCode:(NSInteger)keyCode andFlagsTaken:(NSUInteger)flags error:(NSError **)error;
 {
     // if we have a delegate, it goes first...
+	id <SRValidatorDelegate> delegate = self.delegate;
+
 	if ( delegate )
 	{
 		NSString *delegateReason = nil;
@@ -218,22 +218,6 @@
 		}
 	}
 	return NO;    
-}
-
-#pragma mark -
-#pragma mark accessors
-
-//---------------------------------------------------------- 
-//  delegate 
-//---------------------------------------------------------- 
-- (id) delegate
-{
-    return delegate; 
-}
-
-- (void) setDelegate: (id) theDelegate
-{
-    delegate = theDelegate; // Standard delegate pattern does not retain the delegate
 }
 
 @end
